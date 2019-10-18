@@ -38,7 +38,7 @@ spec:
         - env:
           - name: CODER_AUTH
             value: "false"
-          image: demyx/code-server:latest
+          image: demyx/code-server:wp
           imagePullPolicy: Always
           name: code-server-demyx
           ports:
