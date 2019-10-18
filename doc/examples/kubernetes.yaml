@@ -1,46 +1,46 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: code-server-demyxsage
+  name: code-server-demyx
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: code-server-demyxsage
-  namespace: code-server-demyxsage
+  name: code-server-demyx
+  namespace: code-server-demyx
 spec:
   ports:
     - port: 8080
       name: https
       protocol: TCP
   selector:
-    app: code-server-demyxsage
+    app: code-server-demyx
   type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: code-server-demyxsage
-  name: code-server-demyxsage
-  namespace: code-server-demyxsage
+    app: code-server-demyx
+  name: code-server-demyx
+  namespace: code-server-demyx
 spec:
   selector:
     matchLabels:
-      app: code-server-demyxsage
+      app: code-server-demyx
   replicas: 1
   template:
     metadata:
       labels:
-        app: code-server-demyxsage
+        app: code-server-demyx
     spec:
       containers:
         - env:
           - name: CODER_AUTH
             value: "false"
-          image: demyx/code-server:sage
+          image: demyx/code-server:latest
           imagePullPolicy: Always
-          name: code-server-demyxsage
+          name: code-server-demyx
           ports:
             - containerPort: 8080
               name: https
