@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vscode
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: vscode
+ namespace: vscode
+spec:
+ ports:
+ - port: 8080
+   name: https
+   protocol: TCP
+ selector:
+   app: vscode
+ type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: vscode
+  name: vscode
+  namespace: vscode
+spec:
+  selector:
+    matchLabels:
+      app: vscode
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vscode
+    spec:
+      containers:
+      - image: codercom/vscode:v2
+        imagePullPolicy: Always
+        name: vscode
+        ports:
+        - containerPort: 8080
+          name: https

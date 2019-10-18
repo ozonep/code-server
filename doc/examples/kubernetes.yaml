@@ -1,38 +1,38 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: code-server-demyx
+  name: code-server-demyxwp
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: code-server-demyx
-  namespace: code-server-demyx
+  name: code-server-demyxwp
+  namespace: code-server-demyxwp
 spec:
   ports:
     - port: 8080
       name: https
       protocol: TCP
   selector:
-    app: code-server-demyx
+    app: code-server-demyxwp
   type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: code-server-demyx
-  name: code-server-demyx
-  namespace: code-server-demyx
+    app: code-server-demyxwp
+  name: code-server-demyxwp
+  namespace: code-server-demyxwp
 spec:
   selector:
     matchLabels:
-      app: code-server-demyx
+      app: code-server-demyxwp
   replicas: 1
   template:
     metadata:
       labels:
-        app: code-server-demyx
+        app: code-server-demyxwp
     spec:
       containers:
         - env:
@@ -40,7 +40,7 @@ spec:
             value: "false"
           image: demyx/code-server:wp
           imagePullPolicy: Always
-          name: code-server-demyx
+          name: code-server-demyxwp
           ports:
             - containerPort: 8080
               name: https
