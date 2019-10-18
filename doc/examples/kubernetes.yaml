@@ -1,43 +1,43 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: code-server-alpine
+  name: theia
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: code-server-alpine
-  namespace: code-server-alpine
+  name: theia
+  namespace: theia
 spec:
   ports:
-    - port: 8080
+    - port: 3000
       name: https
       protocol: TCP
   selector:
-    app: code-server-alpine
+    app: theia
   type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: code-server-alpine
-  name: code-server-alpine
-  namespace: code-server-alpine
+    app: theia
+  name: theia
+  namespace: theia
 spec:
   selector:
     matchLabels:
-      app: code-server-alpine
+      app: theia
   replicas: 1
   template:
     metadata:
       labels:
-        app: code-server-alpine
+        app: theia
     spec:
       containers:
-        - image: demyx/code-server:latest
+        - image: theiaide/theia:next
           imagePullPolicy: Always
-          name: code-server-alpine
+          name: theia
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
               name: https
