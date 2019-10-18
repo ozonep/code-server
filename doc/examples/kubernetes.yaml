@@ -10,7 +10,7 @@ metadata:
   namespace: code-server-demyxsage
 spec:
   ports:
-    - port: 3000
+    - port: 8080
       name: https
       protocol: TCP
   selector:
@@ -42,5 +42,5 @@ spec:
           imagePullPolicy: Always
           name: code-server-demyxsage
           ports:
-            - containerPort: 3000
+            - containerPort: 8080
               name: https
