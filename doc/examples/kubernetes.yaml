@@ -1,43 +1,46 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: theia
+  name: code-server-demyxsage
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: theia
-  namespace: theia
+  name: code-server-demyxsage
+  namespace: code-server-demyxsage
 spec:
   ports:
     - port: 3000
       name: https
       protocol: TCP
   selector:
-    app: theia
+    app: code-server-demyxsage
   type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: theia
-  name: theia
-  namespace: theia
+    app: code-server-demyxsage
+  name: code-server-demyxsage
+  namespace: code-server-demyxsage
 spec:
   selector:
     matchLabels:
-      app: theia
+      app: code-server-demyxsage
   replicas: 1
   template:
     metadata:
       labels:
-        app: theia
+        app: code-server-demyxsage
     spec:
       containers:
-        - image: theiaide/theia:next
+        - env:
+          - name: CODER_AUTH
+            value: "false"
+          image: demyx/code-server:sage
           imagePullPolicy: Always
-          name: theia
+          name: code-server-demyxsage
           ports:
             - containerPort: 3000
               name: https
